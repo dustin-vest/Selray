@@ -114,7 +114,7 @@ def main(spray_config, proxy_url):
 
         # Try to load URL, allowing extra time for proxy connectivity
         nav_ok = False
-        max_proxy_wait_s = 10
+        max_proxy_wait_s = 30
         started = datetime.now()
         attempts = 0
         while (datetime.now() - started).total_seconds() < max_proxy_wait_s:
@@ -136,6 +136,7 @@ def main(spray_config, proxy_url):
                     "ERR_PROXY_CONNECTION_FAILED",
                     "ERR_CONNECTION_RESET",
                     "ERR_TIMED_OUT",
+                    "ERR_NETWORK_CHANGED",
                 )
                 if not any(code in err for code in transient_nav_errors):
                     raise
